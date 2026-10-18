@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina Candles | Handcrafted Luxury in Jhapa, Nepal</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-fire-flame-curved"></i>
+            <span>Lumina Candles</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="auth-btn" id="open-auth-btn"><i class="fa-solid fa-user"></i> Sign Up</button>
+            <div class="cart-icon" id="cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Glowing Candle Aesthetic Background -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge">Hand-Poured in Jhapa, Nepal</span>
+            <h1>Illuminate Your Soul with Warmth & Art</h1>
+            <p>Discover enchanting rose, daisy flower, and cute bear-shaped candles crafted with love and eco-friendly wax.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn primary-btn">Shop Collection</a>
+                <a href="https://wa.me/9779844603100?text=Hi,%20I%20would%20like%20to%20inquire%20about%20your%20candles!" target="_blank" class="btn whatsapp-hero-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Quick WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <div class="section-header">
+            <h2>Our Signature Collection</h2>
+            <p class="section-subtitle">Choose from aesthetic shapes, fresh floral blooms, and cozy jars</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Candles</button>
+            <button class="filter-btn" data-filter="shaped">Bear & Shaped</button>
+            <button class="filter-btn" data-filter="floral">Roses & Flowers</button>
+            <button class="filter-btn" data-filter="glass">Glass Jars</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+            <!-- Populated via JS -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <h2>The Lumina Craft</h2>
+            <p>Based right here in Jhapa, Nepal, we handcraft premium wax creations designed to transform your rooms into peaceful sanctuaries. Every bear, rose, and gel jar candle is made with premium fragrance oils and clean burning wicks.</p>
+        </div>
+    </section>
+
+    <!-- Contact & Location Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <h2>Visit & Order</h2>
+            <p class="section-subtitle">Get in touch for custom gifts, bulk orders, or home delivery across Nepal.</p>
+            <div class="contact-details">
+                <div class="contact-card-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Location</h3>
+                    <p>Jhapa, Nepal</p>
+                </div>
+                <div class="contact-card-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+9779844603100">+977 9844603100</a></p>
+                </div>
+                <div class="contact-card-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h3>Direct Order</h3>
+                    <a href="https://wa.me/9779844603100?text=Hi,%20I%20want%20to%20place%20an%20order!" target="_blank" class="whatsapp-badge-btn">
+                        Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">Rs. 0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Sign Up / Login Modal Popup (Updated for Phone Number) -->
+<div class="auth-modal" id="auth-modal">
+    <div class="auth-content">
+        <button class="close-auth" id="close-auth">&times;</button>
+        <div class="auth-tabs">
+            <button class="tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+            <button class="tab-btn" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+            <h3>Welcome Back</h3>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" required placeholder="+977 98XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" required placeholder="Enter password">
+            </div>
+            <button type="submit" class="submit-auth-btn">Login</button>
+        </form>
+        
+        <!-- Sign Up Form -->
+        <form id="signup-form" class="auth-form" onsubmit="handleSignup(event)">
+            <h3>Create Account</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" required placeholder="+977 98XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" required placeholder="Create password">
+            </div>
+            <button type="submit" class="submit-auth-btn">Sign Up</button>
+        </form>
+    </div>
+</div>  
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+                <h3>Welcome Back</h3>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="submit-auth-btn">Login</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form" onsubmit="handleSignup(event)">
+                <h3>Create Account</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Create password">
+                </div>
+                <button type="submit" class="submit-auth-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Lumina Candles. Jhapa, Nepal. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
